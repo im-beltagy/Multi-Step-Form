@@ -1,0 +1,516 @@
+/* Attribution Style */
+.attribution {
+  position: absolute;
+  inset: auto 0 10px;
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+
+/*  ============
+    Global Rules
+    ============  */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.hidden {
+  visibility: hidden;
+}
+
+/* Colors */
+:root {
+  --text-accent: hsl(213, 96%, 18%);
+  --text-accent-active: hsl(213, 71%, 31%);
+  --text-secondry: hsl(231, 11%, 63%);
+  --text-secondry-hight-contrast: hsl(0, 0%, 100%);
+  --text-shadow: rgb(122, 177, 236);
+
+  --field-active: hsl(243, 100%, 62%);
+  --field-error: hsl(354, 84%, 57%);
+
+  --bg-active: hsl(206, 94%, 87%);
+  --section-bg: hsl(0, 0%, 100%);
+  --main-bg: hsl(217, 100%, 97%);
+  --shadow: hsl(229, 24%, 87%);
+
+  --alabaster: hsl(231, 100%, 99%);
+}
+body {
+  font-family: "Ubuntu", sans-serif;
+  background-color: var(--main-bg);
+}
+
+.text h3 {
+  color: var(--text-accent);
+  font-size: 1.2em;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.low-contrast-text {
+  color: var(--text-secondry);
+  font-weight: 400;
+}
+
+/*  ===============
+    Conteiner Style
+    ===============  */
+.container {
+  width: 100%;
+  /* for moblie design */
+  min-height: 100vh;
+  background-image: url("../assets/images/bg-sidebar-mobile.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+@media (min-width: 850px) {
+  .container {
+    display: grid;
+    grid-template-columns: 274px 500px;
+    grid-template-rows: min(568px, 90vh);
+
+    width: fit-content;
+    min-height: fit-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 15px;
+    border-radius: 15px;
+    background: var(--section-bg);
+    box-shadow: 0 35px 50px -20px var(--shadow);
+  }
+}
+
+/*  =========================
+    Steps order (aside) Style
+    =========================  */
+ul {
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+}
+@media (min-width: 850px) {
+  ul {
+    background-image: url("../assets/images/bg-sidebar-desktop.svg");
+    background-repeat: no-repeat;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+ul li {
+  display: block;
+  height: fit-content;
+  margin: 30px 10px;
+  list-style: none;
+}
+@media (min-width: 850px) {
+  ul li {
+    margin: 30px 30px 0;
+    display: flex;
+  }
+}
+ul .order {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 40px;
+  width: 40px;
+
+  color: var(--text-secondry-hight-contrast);
+  font-weight: 500;
+  font-size: 1.1em;
+
+  border: 1px solid var(--text-secondry-hight-contrast);
+  border-radius: 100%;
+
+  transition: background-color 0.3s, color 0.3s;
+}
+@media (min-width: 850px) {
+  ul .order {
+    margin-right: 15px;
+  }
+}
+ul .order.active {
+  color: var(--text-accent);
+  background-color: var(--bg-active);
+  border-color: var(--bg-active);
+}
+ul .text {
+  display: none; /* for mobile */
+}
+@media (min-width: 850px) {
+  ul .text {
+    display: block;
+    color: var(--text-secondry-hight-contrast);
+    text-transform: uppercase;
+  }
+  ul h3 {
+    color: var(--shadow) !important;
+    font-size: 1em !important;
+    font-weight: 400 !important;
+  }
+  ul span {
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+}
+
+/*  ==================
+    Main (steps) style
+    ==================  */
+main {
+  background-color: var(--section-bg);
+  height: fit-content;
+  margin: 0 20px 100px;
+  border-radius: 10px;
+  box-shadow: 0 35px 50px -20px var(--shadow);
+  overflow: hidden;
+}
+@media (min-width: 850px) {
+  main {
+    box-shadow: none;
+    background: none;
+    position: relative; /* To Contain Footer */
+    min-height: 100%;
+    margin-bottom: 0;
+  }
+}
+main h2 {
+  color: var(--text-accent);
+  font-weight: 700;
+}
+main h2 + p {
+  margin: 10px 0;
+  line-height: 1.4;
+  color: var(--text-secondry);
+}
+
+/* Slider */
+.slider {
+  width: 500%;
+  display: flex;
+  transition: 0.3s ease-in-out;
+}
+.slider .step {
+  flex-basis: 100%;
+  padding: 35px 20px;
+}
+
+/* Step One */
+.step-one label {
+  position: relative;
+  display: block;
+  margin: 20px 0 5px;
+  color: var(--text-accent-active);
+  font-weight: 500;
+}
+.step-one label::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 auto;
+  color: var(--field-error);
+  font-weight: 700;
+  letter-spacing: -1px;
+  font-size: 0.9em;
+  max-width: min(300px, 80%);
+  text-align: end;
+}
+.step-one label.required::after {
+  content: "This field is required";
+}
+.step-one label.invalid-name::after {
+  content: "The email address is not formatted correctly";
+}
+.step-one label.invalid-email::after {
+  content: "The email address is not formatted correctly";
+}
+.step-one label.invalid-tel::after {
+  content: "The telephone number is not formatted correctly";
+}
+.step-one input {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: 1px solid var(--text-secondry);
+  border-radius: 5px;
+
+  color: var(--text-accent-active);
+  font-weight: 500;
+}
+.step-one input.error {
+  border-color: var(--field-error);
+}
+.step-one input::placeholder {
+  color: var(--text-secondry);
+}
+.step-one input:focus {
+  border-color: var(--field-active);
+}
+
+/* Step Two & Three */
+.step-two .plans-container > div,
+.step-three .add-on {
+  display: flex;
+  width: 100%;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 7px;
+}
+@media (min-width: 850px) {
+  .step-two .plans-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+.step-two .plan,
+.step-three .add-on {
+  border: 1px solid var(--shadow);
+  cursor: pointer;
+  user-select: none;
+  color: var(--text-accent-active);
+  font-weight: 500;
+}
+@media (min-width: 850px) {
+  .step-two .plan {
+    flex-direction: column;
+    align-items: flex-start;
+    flex-basis: calc((100% - 20px) / 3);
+    margin: 0;
+  }
+}
+.step-two .plan.chosen,
+.step-three .add-on.checked {
+  background-color: var(--main-bg);
+  border-color: var(--field-active);
+}
+.step-two .plan:focus,
+.step-two .plan:hover,
+.step-three .add-on:focus,
+.step-three .add-on:hover {
+  border-color: var(--field-active);
+}
+
+/* Step Two */
+.step-two .plan img {
+  margin-right: 15px;
+}
+@media (min-width: 850px) {
+  .step-two .plan img {
+    margin-bottom: 40px;
+  }
+}
+.step-two .switcher-container {
+  margin-top: 25px;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--main-bg);
+}
+.step-two .switcher-container > span {
+  color: var(--text-secondry);
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+.step-two .switcher-container > span.chosen {
+  color: var(--text-accent);
+  font-weight: 700;
+}
+.step-two .switcher-container input[type="checkbox"] {
+  display: none;
+}
+.step-two label[for="switcher"] {
+  position: relative;
+  background-color: var(--text-accent);
+  width: 40px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 1000px;
+}
+.step-two label[for="switcher"] span {
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%);
+
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+
+  background-color: var(--text-secondry-hight-contrast);
+  transition: 0.3s;
+}
+input[type="checkbox"]:checked + label[for="switcher"] span {
+  left: calc(100% - 16px);
+}
+/* Step Three */
+.add-on {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+.add-on input[type="checkbox"] {
+  display: none;
+}
+.add-on .checkbox-alt {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--text-secondry);
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.add-on input[type="checkbox"]:checked + .checkbox-alt {
+  border-color: var(--field-active);
+  background-color: var(--field-active);
+}
+.add-on .checkbox-alt::before {
+  content: url("../assets/images/icon-checkmark.svg");
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+.add-on input[type="checkbox"]:checked + .checkbox-alt::before {
+  display: block;
+}
+.add-on .price {
+  margin-left: auto;
+}
+
+/* Step Four */
+.step-four .sum {
+  background-color: var(--alabaster);
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+.sum :first-child .text {
+  text-transform: capitalize;
+}
+.sum :first-child .text span:hover {
+  /* (Change) Word */
+  cursor: pointer;
+  text-decoration: underline;
+}
+.sum :not(:first-child) ::first-letter {
+  /* First Letter Of Each Add-On */
+  text-transform: uppercase;
+}
+.step-four h3 {
+  font-size: 1em;
+  text-shadow: 0 0 1px var(--text-shadow);
+  font-weight: 700;
+}
+.step-four .price {
+  color: var(--text-accent);
+  text-shadow: 0 0 1px var(--text-shadow);
+}
+.step-four .row:nth-child(1) .price {
+  font-weight: 700;
+}
+.step-four .total .price {
+  box-shadow: none;
+  color: var(--field-active);
+  font-weight: 700;
+  font-size: 1.2em;
+}
+.step-four .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+.step-four hr {
+  margin: 10px 0;
+  border: none;
+  background-color: var(--text-secondry);
+  height: 1px;
+}
+.step-four .total {
+  padding: 20px;
+}
+
+/* Step Five */
+.step-five {
+  text-align: center;
+  letter-spacing: -0.1px;
+}
+@media (min-width: 850px) {
+  .step-five {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+.step-five img {
+  display: block;
+  margin: 30px auto;
+}
+.step-five h2 {
+  color: var(--text-accent-active);
+  margin-bottom: 10px;
+}
+
+/*  ============
+    Footer Style
+    ============  */
+footer {
+  position: fixed;
+  inset: auto 0 0;
+  background-color: var(--section-bg);
+  margin-top: auto;
+  display: flex;
+}
+@media (min-width: 850px) {
+  footer {
+    position: absolute;
+    margin: 5px 25px 10px;
+    background-color: none;
+  }
+}
+footer > * {
+  display: block;
+  margin: 20px;
+  border: none;
+  cursor: pointer;
+}
+@media (min-width: 850px) {
+  footer > * {
+    margin: 0;
+  }
+}
+footer .next-btn {
+  margin-left: auto;
+  padding: 12px 20px;
+
+  background-color: var(--text-accent);
+  color: var(--alabaster);
+  border-radius: 5px;
+
+  transition: background-color 0.3s;
+}
+footer .next-btn:hover {
+  background-color: var(--text-accent-active);
+}
+footer .next-btn.confirm {
+  background-color: var(--field-active);
+}
+footer .next-btn.confirm:hover {
+  background-color: #827cff;
+}
+footer .back-btn {
+  background: none;
+  color: var(--text-secondry);
+  font-weight: 500;
+}
